@@ -5,6 +5,10 @@
       上善若水公会友谊比赛流程工具
     </div>
 
+	  <div class="top-tip border" v-if="tree.level === 0">
+		  匹配均使用计算机进行随机匹配, 保证公平
+	  </div>
+
     <div class="form border">
       <div class="handle-set">
         <div>
@@ -160,13 +164,18 @@ export default {
   .home-title {
     font-size: 30px;
     text-align: center;
-    padding: 20px;
+    padding-bottom: 20px;
 
   }
+
+	.top-tip {
+		font-size: 28px;
+		color: red;
+	}
   .border {
     padding: 15px;
     border: 1px solid #42b983;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     width: auto;
     .tree {
 

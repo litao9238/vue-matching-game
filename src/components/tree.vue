@@ -1,12 +1,12 @@
 <template>
   <div class="parent" v-if="tree.children">
-    <div v-if="tree.level === 0 && tree.name" class="one">
+    <!--<div class="one" v-if="tree.level === 0 && tree.name">
       {{tree.name}}
-    </div>
+    </div>-->
     <div class="child"
          :class="getClass(item, index)" v-for="(item, index) in tree.children">
       <div class="child-title">
-        
+
         <div class="child-title-name">
           {{item.name}}
         </div>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-    
+
     }
   },
   methods: {
@@ -47,7 +47,7 @@ export default {
 <style lang="scss">
   .one {
     position: absolute;
-    top: 20px;
+    top: 120px;
     width: 120px;
     height: 40px;
     box-sizing: border-box;
@@ -59,7 +59,7 @@ export default {
   .parent {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     .child {
       flex: 1;
@@ -83,7 +83,7 @@ export default {
       }
       .child-title {
         .child-title-btn {
-        
+
         }
       }
     }
@@ -103,12 +103,12 @@ export default {
       padding: 0 5px;
       font-size: 13px;
       .child-title-name {
-      
+
       }
       .child-title-btn {
         font-size: 12px;
       }
     }
   }
-  
+
 </style>
