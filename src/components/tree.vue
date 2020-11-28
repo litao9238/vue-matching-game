@@ -100,7 +100,8 @@ export default {
       justify-content: space-between;
       border: 1px solid #42b983;
       box-sizing: border-box;
-      padding: 0 10px;
+      padding: 0 5px;
+      font-size: 13px;
       .child-title-name {
       
       }
