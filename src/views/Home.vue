@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-  
+
     <div class="home-title">
       上善若水公会友谊比赛流程工具
     </div>
-    
+
     <div class="form border">
       <div class="handle-set">
         <div>
@@ -22,7 +22,7 @@
           <input v-model="item.name" placeholder="请输入选手名称"/>
         </div>
       </div>
-      
+
       <div class="handle-btn">
         <button @click="submitHandle">提交名单</button>
         <button @click="resetHandle">重置表单</button>
@@ -31,7 +31,7 @@
     <div class="border">
       <tree class="tree" :tree="tree" />
     </div>
-    
+
     <div class="border warn">
       温馨提示:
       <br />1. 为了避免<span>(小金人)</span>手贱点了刷新导致数据丢失, 在每次提交名单后, 做了保存处理, 刷新后将恢复到上次提交时的数据
@@ -39,8 +39,8 @@
       <br />3. 我们的口号是: 打倒<span>斯过一</span>
       <div class="author">作者: 艾拉西亚的惊喜_3870</div>
     </div>
-  
-  
+
+
   </div>
 </template>
 
@@ -87,14 +87,19 @@ export default {
       }
     },
     submitHandle() {
+
+    	if (this.tree.children && !window.confirm('确定提交吗? 将清空下方之前的晋级图!')) {
+    		return
+	    }
+
       const arr = this.userList.filter(item => item.name !== '');
-  
+
       if(arr.length <= this.mode * 2 / 3) {
         return alert('至少需要超过当前模式的2/3人数才能创建')
       }
       localStorage.setItem('userList', JSON.stringify(this.userList));
       localStorage.setItem('mode', JSON.stringify(this.mode));
-      
+
       // 空缺位置
       let vacancy = this.mode - arr.length;
       // 补位
@@ -106,14 +111,14 @@ export default {
         })
       }
       this.sortList = sort(list)
-      
+
       this.setTree()
     },
     setTree() {
       let index = 0;
       const sortList = this.sortList;
       function each(children, step, tier) {
-        
+
         if (step > tier) return
         for (let i = 0; i < 2; i++) {
           let obj = {
@@ -125,7 +130,7 @@ export default {
             obj.name = sortList[index].name;
             index++
           }
-          
+
           children.push(obj)
           each(children[i].children, step + 1, tier)
         }
@@ -151,12 +156,12 @@ export default {
 <style lang="scss">
 .home {
   padding: 20px;
-  
+
   .home-title {
     font-size: 30px;
     text-align: center;
     padding: 20px;
-    
+
   }
   .border {
     padding: 15px;
@@ -164,7 +169,7 @@ export default {
     margin-bottom: 20px;
     width: auto;
     .tree {
-  
+
       overflow-y: auto;
     }
   }
@@ -180,11 +185,11 @@ export default {
       color: green;
     }
   }
-  
+
   .form {
-    
-    
-    
+
+
+
     .handle-set {
       display: flex;
       margin-bottom: 10px;
@@ -198,33 +203,33 @@ export default {
         width: 80px;
       }
     }
-    
+
     .user-list {
       display: flex;
       flex-wrap: wrap;
-      
+
       .user-item {
         display: flex;
         align-items: center;
         margin: 10px 10px 0 0;
-        
+
         input {
           width: 120px;
           margin: 0 10px 0 0;
         }
       }
     }
-    
+
     .handle-btn {
       margin-top: 20px;
-      
+
       button {
         font-size: 20px;
         margin-right: 15px;
       }
     }
   }
-  
+
 }
 
 </style>
